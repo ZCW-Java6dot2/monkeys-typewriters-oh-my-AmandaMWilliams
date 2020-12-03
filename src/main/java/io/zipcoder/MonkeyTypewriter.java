@@ -1,8 +1,6 @@
 package io.zipcoder;
 
 public class MonkeyTypewriter {
-    private static Copier unsafeCopier;
-    private static Copier safeCopier;
 
     public static void main(String[] args) {
         String introduction = "It was the best of times,\n" +
@@ -26,30 +24,45 @@ public class MonkeyTypewriter {
         // Do all of the Monkey / Thread building here
         // For each Copier(one safe and one unsafe), create and start 5 monkeys copying the introduction to
         // A Tale Of Two Cities.
-        Thread monkey1 = new Thread(new SafeCopier(introduction));
-        Thread monkey2 = new Thread(new SafeCopier(introduction));
-        Thread monkey3 = new Thread(new SafeCopier(introduction));
-        Thread monkey4 = new Thread(new SafeCopier(introduction));
-        Thread monkey5 = new Thread(new SafeCopier(introduction));
+        SafeCopier safeCopier = new SafeCopier(introduction);
+        UnsafeCopier unsafeCopier = new UnsafeCopier(introduction);
 
-        monkey1.start();
-        monkey2.start();
-        monkey3.start();
-        monkey4.start();
-        monkey5.start();
+        Thread[] safeThreads = new Thread[5];
+        for(int i=0; i<5; i++){
+            safeThreads[i]= new Thread(safeCopier);
+            safeThreads[i].start();
 
-        Thread monkey6 = new Thread(new UnsafeCopier(introduction));
-        Thread monkey7 = new Thread(new UnsafeCopier(introduction));
-        Thread monkey8 = new Thread(new UnsafeCopier(introduction));
-        Thread monkey9 = new Thread(new UnsafeCopier(introduction));
-        Thread monkey10 = new Thread(new UnsafeCopier(introduction));
+        }
 
-        monkey6.start();
-        monkey7.start();
-        monkey8.start();
-        monkey9.start();
-        monkey10.start();
+        Thread[] unsafeThreads = new Thread[5];
+        for(int i=0; i<5; i++) {
+            unsafeThreads[i] = new Thread(unsafeCopier);
+            unsafeThreads[i].start();
+        }
 
+//        Thread monkey1 = new Thread(new SafeCopier(introduction));
+//        Thread monkey2 = new Thread(new SafeCopier(introduction));
+//        Thread monkey3 = new Thread(new SafeCopier(introduction));
+//        Thread monkey4 = new Thread(new SafeCopier(introduction));
+//        Thread monkey5 = new Thread(new SafeCopier(introduction));
+//
+//        monkey1.start();
+//        monkey2.start();
+//        monkey3.start();
+//        monkey4.start();
+//        monkey5.start();
+//
+//        Thread monkey6 = new Thread(new UnsafeCopier(introduction));
+//        Thread monkey7 = new Thread(new UnsafeCopier(introduction));
+//        Thread monkey8 = new Thread(new UnsafeCopier(introduction));
+//        Thread monkey9 = new Thread(new UnsafeCopier(introduction));
+//        Thread monkey10 = new Thread(new UnsafeCopier(introduction));
+//
+//        monkey6.start();
+//        monkey7.start();
+//        monkey8.start();
+//        monkey9.start();
+//        monkey10.start();
 
         // This wait is here because main is still a thread and we want the main method to print the finished copies
         // after enough time has passed.
