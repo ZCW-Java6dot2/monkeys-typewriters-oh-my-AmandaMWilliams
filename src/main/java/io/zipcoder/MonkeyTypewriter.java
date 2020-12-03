@@ -29,11 +29,23 @@ public class MonkeyTypewriter {
         Thread monkey4 = new Thread(new SafeCopier(introduction));
         Thread monkey5 = new Thread(new SafeCopier(introduction));
 
+        monkey1.start();
+        monkey2.start();
+        monkey3.start();
+        monkey4.start();
+        monkey5.start();
+
         Thread monkey6 = new Thread(new UnsafeCopier(introduction));
         Thread monkey7 = new Thread(new UnsafeCopier(introduction));
         Thread monkey8 = new Thread(new UnsafeCopier(introduction));
         Thread monkey9 = new Thread(new UnsafeCopier(introduction));
         Thread monkey10 = new Thread(new UnsafeCopier(introduction));
+
+        monkey6.start();
+        monkey7.start();
+        monkey8.start();
+        monkey9.start();
+        monkey10.start();
 
 
         // This wait is here because main is still a thread and we want the main method to print the finished copies
