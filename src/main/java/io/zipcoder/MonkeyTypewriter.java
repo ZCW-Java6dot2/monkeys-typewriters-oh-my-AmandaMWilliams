@@ -1,6 +1,9 @@
 package io.zipcoder;
 
 public class MonkeyTypewriter {
+    private static Copier unsafeCopier;
+    private static Copier safeCopier;
+
     public static void main(String[] args) {
         String introduction = "It was the best of times,\n" +
                 "it was the blurst of times,\n" +
@@ -57,5 +60,8 @@ public class MonkeyTypewriter {
         }
 
         // Print out the copied versions here.
+
+        System.out.println("UNSAFE COPY:\n" + unsafeCopier.copied);
+        System.out.println("SAFE COPY:\n" + safeCopier.copied);
     }
 }
